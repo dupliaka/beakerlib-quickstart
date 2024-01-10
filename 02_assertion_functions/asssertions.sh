@@ -1,24 +1,28 @@
 #!/bin/bash
 . /usr/share/beakerlib/beakerlib.sh
 
-EXPECTED=0
-ACTUAL_EQ_EXPECTED=0
-ACTUAL_NEQ_EXPECTED=1
-TEST_FILE="./README.md"
-EXPECTED_PATTERN="Assertion Functions"
-UNEXPECTED_PATTERN="Unexpected"
-
+TEST_FILE=testfile
 
 rlJournalStart
-    rlPhaseStartTest "Assertion sample"
-      rlAssertEquals "Asserts equality of expected and actual" $EXPECTED $ACTUAL_EQ_EXPECTED
-      rlAssertNotEquals "Asserts inequality of expected and actual" $EXPECTED $ACTUAL_NEQ_EXPECTED
-      rlAssertGrep "$EXPECTED_PATTERN" $TEST_FILE # keep quotes around expected pattern prevents space split commands to be interpreted as a pattern and filepath
-      rlAssertNotGrep "$UNEXPECTED_PATTERN" $TEST_FILE
-      rlAssertRpm setup
-      rlAssertNotRpm testrpm
-      rlAssertExists ../02_assertion_functions
-      rlAssertExists asssertions.sh
-      rlAssertNotExists testNonExistingFileOrDirectory
+
+    rlPhaseStartSetup "Create test file"
+        rlRun "echo 'Assertion Functions' > $TEST_FILE" 0
     rlPhaseEnd
+
+    rlPhaseStartTest "Assertion sample"
+        rlAssertEquals "Asserts equality of expected and actual" "$(echo 1)" 1
+        rlAssertNotEquals "Asserts inequality of expected and actual" "$(false)" 1
+        rlAssertGrep "Assertion Functions" $TEST_FILE # keep quotes around expected pattern prevents space split commands to be interpreted as a pattern and filepath
+        rlAssertNotGrep "Unexpected" $TEST_FILE
+        rlAssertRpm "setup"
+        rlAssertNotRpm "testrpm"
+        rlAssertExists "../02_assertion_functions"
+        rlAssertExists "asssertions.sh"
+        rlAssertNotExists "testNonExistingFileOrDirectory"
+    rlPhaseEnd
+
+    rlPhaseStartCleanup "Cleanup - remove testfile"
+        rlRun "rm $TEST_FILE" 0
+    rlPhaseEnd
+
 rlJournalEnd

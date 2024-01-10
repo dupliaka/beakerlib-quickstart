@@ -1,9 +1,13 @@
 #!/bin/bash
+
 # Include BeakerLib environment
 . /usr/share/beakerlib/beakerlib.sh
 
 rlJournalStart
-    rlPhaseStartTest "Sample Test"
-        rlAssertEquals "Check if true is true" 0 0
+
+    rlPhaseStartTest "Hello World Test"
+        rlLog "Hello, World!"
+        rlAssert0 "Check if 'Hello, World!' was logged" 0
     rlPhaseEnd
+
 rlJournalEnd

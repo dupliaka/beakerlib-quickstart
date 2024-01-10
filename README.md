@@ -1,4 +1,4 @@
-# BeakerLib quickstart
+# BeakerLib quickstarts
 
 BeakerLib is a shell-level integration testing library, providing developers with a tool to simplify writing and running test cases. It is primarily used for testing applications and system services in a real environment, ensuring that they behave as expected.
 
@@ -14,7 +14,7 @@ BeakerLib is a shell-level integration testing library, providing developers wit
 To get started with BeakerLib, you can clone the repository and install it on your system.
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/beakerlib/beakerlib.git
 cd beakerlib
 make install
 ```
@@ -27,11 +27,11 @@ BeakerLib tests are written as shell scripts that utilize BeakerLib library func
 . /usr/share/beakerlib/beakerlib.sh
 
 rlJournalStart
-    rlPhaseStartTest "Sample Test"
-        rlAssertEquals "Check if true is true" 0 0
+    rlPhaseStartTest "Hello World Test"
+        rlLog "Hello, World!"
+        rlAssert0 "Check if 'Hello, World!' was logged" 0
     rlPhaseEnd
 rlJournalEnd
-
 ```
 
 ## Documentation

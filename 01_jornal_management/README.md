@@ -27,7 +27,7 @@ Journal Functionality:
     Python Journal Processing:
         The journalling.py script translates metafile entries into an XML journal, handling attributes and timestamps.
 
-Potential Pitfalls ('Underwater Stones'):
+Potential Pitfalls:
 
     Phase Management:
         A controlled reboot must not occur within an open phase, as it can lead to incorrect reporting of results. Phases must be properly closed before a reboot.
@@ -56,4 +56,3 @@ Potential Pitfalls ('Underwater Stones'):
     XML Transformation:
         The XSL transformation applied to the XML tree must be correct to ensure the journal's readability and structure.
 
-To mitigate these issues, it's important to follow best practices such as closing phases properly, handling character encodings, ensuring accurate timestamps, and implementing robust error handling. Additionally, regular reviews and tests of the journaling functionality can help identify and resolve potential problems early on.

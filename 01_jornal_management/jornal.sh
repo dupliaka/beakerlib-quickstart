@@ -9,18 +9,16 @@
 
 #rlJournalPrintText prints meta-information like CPU, RAM, HDD size, BeakerLib version.
 
-BASELINE=0
-
 rlJournalStart
     rlPhaseStartSetup "Test Setup - if it is fails it reports WARN"
     rlPhaseEnd
 
     rlPhaseStartTest "Test Phase - if it is fails it reports FAIL"
-      rlLog "Journaling messages example"
-      rlAssertEquals "With assert equals showcase" $BASELINE 0
-      rlAssertGrep "Journal Management" ./README.md
-      rlJournalPrint
-      rlJournalPrintText
+        rlLog "Journaling messages example"
+        rlAssertEquals "With assert equals showcase" "$(true && echo 'Success')" "Success"
+        rlAssertGrep "Journal Management" "./README.md"
+        rlJournalPrint
+        rlJournalPrintText
     rlPhaseEnd
 
     rlPhaseStartCleanup "Cleanup - if it is fails it reports WARN"
